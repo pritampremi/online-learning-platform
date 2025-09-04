@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h3>{{ lesson.title }}</h3>
+    <p class="text-muted"><strong>Course:</strong> {{ course.title }}</p>
+
+    <div class="mb-3">
+        <iframe src="{{ lesson.video_url }}" width="100%" height="400" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    {% if lesson.content %}
+        <div class="mb-3">
+            <p>{{ lesson.content }}</p>
+        </div>
+    {% endif %}
+
+    
+
+    {% if lesson.pdf %}
+        <a href="{{ lesson.pdf.url }}" class="btn btn-outline-success" download>
+            <i class="bi bi-download"></i> Download PDF
+        </a>
+    {% endif %}
+
+        <a href="{{ lesson.video_url }}" target="_blank" class="btn btn-outline-danger">
+            <i class="bi bi-youtube"></i> Watch Video
+        </a>
+
+    {% if is_student %}
+    {% if not is_completed %}
+        <form method="POST" action="{% url 'courses:mark_lesson_complete' lesson.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-success mt-2">
+                <i class="bi bi-check-square"></i> Mark as Completed
+            </button>
+        </form>
+    {% else %}
+        <span class="badge bg-success">Completed</span>
+    {% endif %}
+{% endif %}
+
+
+
+    <div class="mt-4">
+        <a href="{% url 'courses:course_detail' course.id %}" class="btn btn-secondary">Back to Course</a>
+    </div>
+</div>
+{% endblock %}

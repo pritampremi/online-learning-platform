@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h3><i class="bi bi-journals"></i> Courses</h3>
+    <div class="row">
+        {% for course in courses %}
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    {% if course.thumbnail %}
+                        <img src="{{ course.thumbnail.url }}" class="card-img-top object-fit-contain" alt="{{ course.title }}" style="height: 300px; width: 100%;">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ course.title }}</h5>
+                        <p class="card-text">{{ course.description|truncatewords:20 }}</p>
+                        <a href="{% url 'courses:course_detail' course.id %}" class="btn btn-outline-primary">View Course</a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>No courses available yet.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

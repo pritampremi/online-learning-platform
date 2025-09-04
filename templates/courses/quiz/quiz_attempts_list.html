@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h3>Quiz Attempts for "{{ quiz.title }}"</h3>
+
+    {% if attempts %}
+    <table class="table table-bordered table-striped mt-3">
+        <thead class="table-dark">
+            <tr>
+                <th>#</th>
+                <th>Student</th>
+                <th>Score</th>
+                <th>Attempted At</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for attempt in attempts %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ attempt.student.username }}</td>
+                    <td>{{ attempt.score }} / {{ quiz.questions.count }}</td>
+                    <td>{{ attempt.attempted_at|date:"M d, Y H:i" }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No students have attempted this quiz yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

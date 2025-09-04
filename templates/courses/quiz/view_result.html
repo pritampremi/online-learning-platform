@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h3>Results: {{ quiz.title }}</h3>
+    <p><strong>Score:</strong> {{ attempt.score }} / {{ quiz.questions.count }}</p>
+
+    <hr>
+    {% for answer in answers %}
+        <div class="mb-3">
+            <strong>Q:</strong> {{ answer.question.text }}<br>
+            <strong>Your Answer:</strong> {{ answer.selected_option.text }}
+            {% if answer.selected_option.is_correct %}
+                <span class="badge bg-success">Correct</span>
+            {% else %}
+                <span class="badge bg-danger">Wrong</span>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

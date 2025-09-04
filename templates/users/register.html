@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <h3 class="mb-4">Register for GURUKUL</h3>
+        <form method="POST" class="card p-4 shadow">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-success w-100">Register</button>
+        </form>
+        <p class="mt-3 text-center">
+            Already have an account? <a href="{% url 'users:login' %}">Login</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

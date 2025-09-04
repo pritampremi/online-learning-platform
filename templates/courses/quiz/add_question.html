@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h3>Add Question to "{{ quiz.title }}"</h3>
+    <form method="post">
+        {% csrf_token %}
+        <h5>Question:</h5>
+        {{ question_form.as_p }}
+
+        <h5>Options:</h5>
+        {{ option_formset.management_form }}
+        {% for form in option_formset %}
+            <div class="card p-3 mb-2">
+                {{ form.as_p }}
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-success">Add Question</button>
+        <a href="{% url 'courses:course_detail' quiz.course.id %}" class="btn btn-secondary">Finish</a>
+    </form>
+</div>
+{% endblock %}

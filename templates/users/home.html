@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="text-center mt-5">
+    <h2>Welcome, {{ request.user.username }}!</h2>
+
+    {% if is_instructor %}
+        <p class="lead">You're logged in as an <strong>Instructor</strong>.</p>
+
+        <a href="{% url 'courses:create_course' %}" class="btn btn-success mb-2">
+            <i class="bi bi-plus-circle"></i> Create a Course
+        </a>
+
+        <a href="{% url 'courses:my_courses' %}" class="btn btn-outline-info mb-2">
+            <i class="bi bi-layers"></i> My Courses
+        </a>
+
+        
+
+
+    {% elif is_student %}
+        <p class="lead">You're logged in as a <strong>Student</strong>.</p>
+        <a href="{% url 'courses:browse_courses' %}" class="btn btn-primary">Browse Courses</a>
+        <a href="{% url 'courses:my_learning' %}" class="btn btn-outline-secondary">My Learning</a>
+
+
+    {% else %}
+        <p class="text-muted">Your role is not assigned yet.</p>
+    {% endif %}
+
+</div>
+{% endblock %}

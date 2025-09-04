@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+    <h3>Quizzes for "{{ course.title }}"</h3>
+
+    <a href="{% url 'courses:create_quiz' course.id %}" class="btn btn-success mb-3">
+        <i class="bi bi-plus-circle"></i> Add New Quiz
+    </a>
+
+    {% if quizzes %}
+    <div class="list-group">
+        {% for quiz in quizzes %}
+        <div class="list-group-item">
+            <h5 class="mb-1">{{ quiz.title }}</h5>
+            <small>Created: {{ quiz.created_at|date:"M d, Y H:i" }}</small><br>
+
+            
+            <a href="{% url 'courses:quiz_attempts_list' quiz.id %}" class="btn btn-sm btn-outline-primary mt-2">View Attempts</a>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No quizzes created yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

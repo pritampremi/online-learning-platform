@@ -1,0 +1,16 @@
+<form action="{% url 'courses:verify_payment' course.id %}" method="POST">
+    {% csrf_token %}
+    <script
+        src="https://checkout.razorpay.com/v1/checkout.js"
+        data-key="{{ razorpay_key }}"
+        data-amount="{{ payment.amount }}"
+        data-currency="INR"
+        data-order_id="{{ payment.id }}"
+        data-buttontext="Pay & Enroll Now"
+        data-name="GURUKUL"
+        data-description="{{ course.title }}"
+        data-image="/static/logo.png"
+        data-prefill.name="{{ request.user.username }}"
+        data-theme.color="#0d6efd">
+    </script>
+</form>

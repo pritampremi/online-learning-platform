@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h3>Edit Course: {{ course.title }}</h3>
+    <form method="POST" enctype="multipart/form-data" class="card p-4">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary m-auto w-50">Save Changes</button>
+        <a href="{% url 'courses:my_courses' %}" class="btn btn-secondary mt-2 m-auto w-50">Cancel</a>
+    </form>
+    
+</div>
+{% endblock %}
